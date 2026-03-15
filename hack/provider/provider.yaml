@@ -9,7 +9,7 @@ options:
     password: true
   AGENT_PATH:
     description: "Path to inject the DevPod agent on the sprite"
-    default: /tmp/devpod
+    default: /tmp/devpod-agent
   TARGET_DIR:
     description: "Root directory for dockerless containers and images"
     default: /tmp/devpod-dockerless
