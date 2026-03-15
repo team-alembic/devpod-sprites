@@ -1,0 +1,25 @@
+name: sprites
+version: v0.0.1
+description: DevPod on Sprites.dev
+icon: https://sprites.dev/images/favicon/apple-touch-icon.png
+options:
+  SPRITE_TOKEN:
+    description: "Sprites.dev API token"
+    required: true
+    password: true
+  AGENT_PATH:
+    description: "Path to inject the DevPod agent on the sprite"
+    default: /tmp/devpod
+agent:
+  path: ${AGENT_PATH}
+binaries:
+  SPRITES_PROVIDER:
+    - os: darwin
+      arch: arm64
+      path: file:///Users/jmshrtn/Dev/github.com/team-alembic/devpod-sprites/devpod-provider-sprites
+exec:
+  init: ${SPRITES_PROVIDER} init
+  command: ${SPRITES_PROVIDER} command
+  create: ${SPRITES_PROVIDER} create
+  delete: ${SPRITES_PROVIDER} delete
+  status: ${SPRITES_PROVIDER} status
