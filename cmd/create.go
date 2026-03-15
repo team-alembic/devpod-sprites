@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"context"
+	"os"
 
 	sprites "github.com/superfly/sprites-go"
 	"github.com/spf13/cobra"
@@ -27,5 +28,13 @@ func runCreate(ctx context.Context, opts *options.Options) error {
 	defer client.Close()
 
 	_, err := client.CreateSprite(ctx, opts.MachineID, nil)
-	return err
+	if err != nil {
+		return err
+	}
+
+	sprite := client.Sprite(opts.MachineID)
+	cmd := sprite.CommandContext(ctx, "sudo", "apt-get", "install", "-y", "uidmap")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	return cmd.Run()
 }
