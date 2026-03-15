@@ -10,8 +10,32 @@ options:
   AGENT_PATH:
     description: "Path to inject the DevPod agent on the sprite"
     default: /tmp/devpod
+  TARGET_DIR:
+    description: "Root directory for dockerless containers and images"
+    default: /tmp/devpod-dockerless
 agent:
   path: ${AGENT_PATH}
+  docker:
+    install: false
+  driver: custom
+  binaries:
+    DOCKERLESS_PROVIDER:
+      - os: linux
+        arch: amd64
+        path: https://github.com/loft-sh/devpod-provider-dockerless/releases/download/v0.0.1-alpha.8/devpod-provider-dockerless-linux-amd64
+        checksum: 14c90b8c5e2c0c19096723757586273c1e26a6fdf096a14215e26428010d3aac
+      - os: linux
+        arch: arm64
+        path: https://github.com/loft-sh/devpod-provider-dockerless/releases/download/v0.0.1-alpha.8/devpod-provider-dockerless-linux-arm64
+        checksum: 4b7985c0391026d55b53a2316a4dd710132030ae68884e40652f434a8608204b
+  custom:
+    findDevContainer: ${DOCKERLESS_PROVIDER} find
+    commandDevContainer: ${DOCKERLESS_PROVIDER} command
+    startDevContainer: ${DOCKERLESS_PROVIDER} start
+    stopDevContainer: ${DOCKERLESS_PROVIDER} stop
+    runDevContainer: ${DOCKERLESS_PROVIDER} run
+    deleteDevContainer: ${DOCKERLESS_PROVIDER} delete
+    targetArchitecture: ${DOCKERLESS_PROVIDER} target-architecture
 binaries:
   SPRITES_PROVIDER:
     - os: linux
