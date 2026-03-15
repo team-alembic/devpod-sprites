@@ -14,9 +14,26 @@ agent:
   path: ${AGENT_PATH}
 binaries:
   SPRITES_PROVIDER:
+    - os: linux
+      arch: amd64
+      path: https://github.com/team-alembic/devpod-sprites/releases/download/v0.0.1/devpod-provider-sprites-linux-amd64
+      checksum: c76cfc129c82e482445fa227eb34df47b7effeca5107dbd01699cfe302b8356e
+    - os: linux
+      arch: arm64
+      path: https://github.com/team-alembic/devpod-sprites/releases/download/v0.0.1/devpod-provider-sprites-linux-arm64
+      checksum: 259594b637b0cc6f7579e2f1aeeb879b518e51403c3ed384b7711760862520d3
+    - os: darwin
+      arch: amd64
+      path: https://github.com/team-alembic/devpod-sprites/releases/download/v0.0.1/devpod-provider-sprites-darwin-amd64
+      checksum: 50e2139d5dc753c13712bd66075836327e800eb904596e5932da87b8082a8b61
     - os: darwin
       arch: arm64
-      path: file:///Users/jmshrtn/Dev/github.com/team-alembic/devpod-sprites/devpod-provider-sprites
+      path: https://github.com/team-alembic/devpod-sprites/releases/download/v0.0.1/devpod-provider-sprites-darwin-arm64
+      checksum: 0723cbf76573d35cda6313af52c6cf0f0aeaddc2e08f37af9fe8fb0079236ded
+    - os: windows
+      arch: amd64
+      path: https://github.com/team-alembic/devpod-sprites/releases/download/v0.0.1/devpod-provider-sprites-windows-amd64.exe
+      checksum: d33e5b6e3934e622976310df77497d00979803db361f2f558041c40d22276a04
 exec:
   init: ${SPRITES_PROVIDER} init
   command: ${SPRITES_PROVIDER} command
